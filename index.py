@@ -23,7 +23,6 @@ time.sleep(5)
 
 # --- Settings ---
 contact_name = "GF's exact contact here"  # EXACT chat name
-message_count = 50  # Max number of messages to send
 
 messages = [
     "hello baby",
