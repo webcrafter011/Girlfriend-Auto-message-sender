@@ -22,48 +22,99 @@ input("📲 Scan the QR code in this Brave window once, then press Enter…")
 time.sleep(5)
 
 # --- Settings ---
-contact_name  = "GF's exact contact here"      # EXACT chat name
-message_count = 50        # Max number of messages to send
+contact_name = "GF's exact contact here"  # EXACT chat name
+message_count = 50  # Max number of messages to send
 
 messages = [
-    "hello baby", "sorry na baby", "I am so sorry baby please lets talk na",
-    "i am sorry bachha", "I love you baby 😘", "Aik na darling please talk na",
-    "i didnt do it intentionally na baby aika na", "please talk baby",
-    "mujhe aapki yaad aarhi hai yaar please talk na", "baby bola na please",
-    "hello baby please talk na", "hello baby", "hello darling", "kay kartay",
-    "hellooooooo", "please talk na darling aika na", "baby please listen to me na",
-    "I miss you so much", "My heart aches without you", "Can't stop thinking about you",
-    "Please forgive me", "I need you here", "I feel lost without you",
-    "You mean everything to me", "Come back to me", "I'm nothing without you",
-    "My world is dark without you", "Please don’t go", "I’m hurting inside",
-    "My heart belongs to you", "I’m begging you", "You’re my everything",
-    "Please stay with me", "I can’t live like this", "I regret my mistake",
-    "I want to make things right", "I’m sorry from the bottom of my heart",
-    "I feel empty without you", "I’m drowning in guilt", "You’re all I think about",
-    "I miss your smile", "I wish I could turn back time", "My love for you is endless",
-    "Please give me another chance", "I’m craving your touch", "I promise I’ll change",
-    "I can’t breathe without you", "I’m sorry for the pain I caused", "My heart screams your name",
-    "Please let me fix this", "You’re the reason I smile", "I’m lost in memories of us",
-    "I ache for your voice", "I’m sorry I hurt you", "I’m desperate for your love",
-    "You’re my one and only", "I’m incomplete without you", "I need your forgiveness",
-    "I’m sorry for everything", "My soul longs for you", "I miss our talks",
-    "I can’t imagine life without you", "I’m sorry for the silence", "You’re the beat in my heart",
-    "I’m longing for you", "Please come back", "I love you more every day"
+    "hello baby",
+    "sorry na baby",
+    "I am so sorry baby please lets talk na",
+    "i am sorry bachha",
+    "I love you baby 😘",
+    "Aik na darling please talk na",
+    "i didnt do it intentionally na baby aika na",
+    "please talk baby",
+    "mujhe aapki yaad aarhi hai yaar please talk na",
+    "baby bola na please",
+    "hello baby please talk na",
+    "hello baby",
+    "hello darling",
+    "kay kartay",
+    "hellooooooo",
+    "please talk na darling aika na",
+    "baby please listen to me na",
+    "I miss you so much",
+    "My heart aches without you",
+    "Can't stop thinking about you",
+    "Please forgive me",
+    "I need you here",
+    "I feel lost without you",
+    "You mean everything to me",
+    "Come back to me",
+    "I'm nothing without you",
+    "My world is dark without you",
+    "Please don’t go",
+    "I’m hurting inside",
+    "My heart belongs to you",
+    "I’m begging you",
+    "You’re my everything",
+    "Please stay with me",
+    "I can’t live like this",
+    "I regret my mistake",
+    "I want to make things right",
+    "I’m sorry from the bottom of my heart",
+    "I feel empty without you",
+    "I’m drowning in guilt",
+    "You’re all I think about",
+    "I miss your smile",
+    "I wish I could turn back time",
+    "My love for you is endless",
+    "Please give me another chance",
+    "I’m craving your touch",
+    "I promise I’ll change",
+    "I can’t breathe without you",
+    "I’m sorry for the pain I caused",
+    "My heart screams your name",
+    "Please let me fix this",
+    "You’re the reason I smile",
+    "I’m lost in memories of us",
+    "I ache for your voice",
+    "I’m sorry I hurt you",
+    "I’m desperate for your love",
+    "You’re my one and only",
+    "I’m incomplete without you",
+    "I need your forgiveness",
+    "I’m sorry for everything",
+    "My soul longs for you",
+    "I miss our talks",
+    "I can’t imagine life without you",
+    "I’m sorry for the silence",
+    "You’re the beat in my heart",
+    "I’m longing for you",
+    "Please come back",
+    "I love you more every day",
 ]
 
 
 # --- Open chat ---
-search_box = driver.find_element(By.XPATH, "//div[@contenteditable='true'][@data-tab='3']")
-search_box.click(); time.sleep(1)
-search_box.send_keys(contact_name); time.sleep(1)
-search_box.send_keys(Keys.ENTER); time.sleep(2)
+search_box = driver.find_element(
+    By.XPATH, "//div[@contenteditable='true'][@data-tab='3']"
+)
+search_box.click()
+time.sleep(1)
+search_box.send_keys(contact_name)
+time.sleep(1)
+search_box.send_keys(Keys.ENTER)
+time.sleep(2)
 
 # --- Count existing inbound messages ---
 inbound_xpath = "//div[contains(@class, 'message-in')]"
 initial_inbounds = len(driver.find_elements(By.XPATH, inbound_xpath))
 
 # --- Message‑send loop with reply‑check ---
-message_box = driver.find_element(By.XPATH, "//div[@contenteditable='true'][@data-tab='10']")
+message_box = driver.find_element(
+    By.XPATH, "//div[@contenteditable='true'][@data-tab='10']"
+)
 
 count = 1
 while True:
