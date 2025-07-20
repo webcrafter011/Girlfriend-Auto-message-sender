@@ -7,23 +7,30 @@ import os
 
 # --- Paths ---
 BRAVE_PATH = "C:/Program Files/BraveSoftware/Brave-Browser/Application/brave.exe"
+
+# This folder will be created automatically to store a fresh profile
 NEW_PROFILE_DIR = r"C:\Users\Manuj\BraveSeleniumNewProfile"
+
+# Ensure the folder exists
 os.makedirs(NEW_PROFILE_DIR, exist_ok=True)
 
-# --- Selenium options ---
 options = webdriver.ChromeOptions()
 options.binary_location = BRAVE_PATH
 options.add_argument(f"--user-data-dir={NEW_PROFILE_DIR}")
 options.add_argument("--profile-directory=Default")
 
+# --- Launch Brave with the new profile ---
 driver = webdriver.Chrome(options=options)
 driver.get("https://web.whatsapp.com")
-input("📲 Scan the QR code in this Brave window once, then press Enter…")
-time.sleep(5)
 
-# --- Settings ---
-contact_name = "GF's exact contact here"  # EXACT chat name
+# --- First‑time setup: scan QR here ---
+input("📲 Please scan the QR code in this Brave window, then press Enter here…")
 
+# --- Your automation settings ---
+contact_name = "akshay ji"  # EXACT chat name
+message_count = 50  # Total messages to send
+
+# --- Your message bank (67 emotional lines) ---
 messages = [
     "hello baby",
     "sorry na baby",
@@ -94,48 +101,30 @@ messages = [
     "I love you more every day",
 ]
 
-
-# --- Open chat ---
+# --- Open the chat ---
 search_box = driver.find_element(
     By.XPATH, "//div[@contenteditable='true'][@data-tab='3']"
 )
 search_box.click()
 time.sleep(1)
 search_box.send_keys(contact_name)
-time.sleep(1)
+time.sleep(2)
 search_box.send_keys(Keys.ENTER)
 time.sleep(2)
 
-# --- Count existing inbound messages ---
-inbound_xpath = "//div[contains(@class, 'message-in')]"
-initial_inbounds = len(driver.find_elements(By.XPATH, inbound_xpath))
-
-# --- Message‑send loop with reply‑check ---
+# --- Send messages with random delays ---
 message_box = driver.find_element(
     By.XPATH, "//div[@contenteditable='true'][@data-tab='10']"
 )
-
-count = 1
-while True:
-    # Send
+for i in range(message_count):
     msg = random.choice(messages)
     message_box.send_keys(msg)
     message_box.send_keys(Keys.ENTER)
-    print(f"[{count}] Sent: {msg}")
+    print(f"[{i+1}/{message_count}] Sent: {msg}")
 
-    # Before waiting for next, check for new inbound
-    time.sleep(2)  # give a moment for any reply to appear
-    current_inbounds = len(driver.find_elements(By.XPATH, inbound_xpath))
-    if current_inbounds > initial_inbounds:
-        print("💬 Reply detected—stopping automation.")
-        break
-
-    # No reply yet, update count and wait randomly
-    initial_inbounds = current_inbounds
     delay = random.uniform(2, 40)
-    print(f"   → Waiting {delay:.1f}s before next message…")
+    print(f"   → Waiting {delay:.1f}s")
     time.sleep(delay)
-    count += 1
 
-print("✅ Automation ended.")
+print("✅ All done!")
 driver.quit()
