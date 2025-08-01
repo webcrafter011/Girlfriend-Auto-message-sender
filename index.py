@@ -27,7 +27,7 @@ driver.get("https://web.whatsapp.com")
 input("📲 Please scan the QR code in this Brave window, then press Enter here…")
 
 # --- Your automation settings ---
-contact_name = "akshay ji"  # EXACT chat name
+contact_name = "Conact name"  # EXACT chat name
 message_count = 50  # Total messages to send
 
 # --- Your message bank (67 emotional lines) ---
